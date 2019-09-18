@@ -41,8 +41,9 @@ for i in range(ndists):
 			x0 = (np.random.rand(m) < theta) * np.random.randn(m)
 		else:
 			m = n-p0+1+d
-			x0 = (np.random.rand(m) < theta/2) * np.random.randn(m)	
-			x0 = (x0[:-d] + x0[d:])
+			x0 = (np.random.rand(m) < 2*theta/3) * np.random.randn(m)	
+			x0 = (x0[:-d] + \
+				 x0[d:] * (np.random.rand(m-d) < 1/2) * (1+np.random.rand(m-d)))
 		x0 = np.concatenate([x0, np.zeros(p0-1)])
 
 		# y, a_init
@@ -79,10 +80,11 @@ xdatalabel = list(dependency_dists[:-1]) + ['iid.']
 plt.errorbar(xdata, avg_corr, var_corr); 
 plt.xscale("log")
 plt.xticks(xdata, xdatalabel)
-plt.xlabel("Dependent entries distance")
-plt.ylabel("Largest shict-coherence")
-plt.title("Effect of support distance in sparse pattern")
-plt.draw(); plt.pause(1e-3)
+plt.xlabel("dependent support distance", fontsize=14)
+plt.ylabel("max shift-coherence", fontsize=14)
+plt.title("Effect of support distance in x0", fontsize=16)
+plt.tight_layout()
+# plt.draw(); plt.pause(1e-3)
 plt.savefig('results_abd_on_dpdtx0.pdf', transparent=True)
 
 
