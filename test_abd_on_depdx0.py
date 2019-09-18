@@ -77,6 +77,7 @@ for i in range(ndists):
 
 xdata = list(dependency_dists[:-1]) + [10000]
 xdatalabel = list(dependency_dists[:-1]) + ['iid.']
+plt.figure()
 plt.errorbar(xdata, avg_corr, var_corr); 
 plt.xscale("log")
 plt.xticks(xdata, xdatalabel)
