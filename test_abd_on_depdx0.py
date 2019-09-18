@@ -72,7 +72,7 @@ for i in range(ndists):
 		maxcorrs.append(max(abs(np.correlate(a_out,a0,'full'))))
 	maxcorrs = np.array(sorted(maxcorrs)[2:-2])
 	avg_corr[i] = sum(maxcorrs) / len(maxcorrs)
-	var_corr[i] = np.sqrt(sum((maxcorrs - avg_corr[i])**2))
+	var_corr[i] = np.sqrt(sum((maxcorrs - avg_corr[i])**2)/(len(maxcorrs)-1))
 
 xdata = list(dependency_dists[:-1]) + [10000]
 xdatalabel = list(dependency_dists[:-1]) + ['iid.']
